@@ -227,7 +227,7 @@
                                 <div class="row mt-3">
                                     <div class="col-md-6">
                                         <label>Visi</label>
-                                        <textarea name="visi" id="" cols="30" rows="10" class="form-control">{{ $data->visi }}</textarea>
+                                        <textarea name="visi" id="" cols="30" rows="10" class="form-control summernote">{{ $data->visi }}</textarea>
                                         @error('visi')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -238,7 +238,7 @@
                                         <label>Misi</label>
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <textarea name="misi" id="" cols="30" rows="10" class="form-control">{{ $data->misi }}</textarea>
+                                                <textarea name="misi" id="" cols="30" rows="10" class="form-control summernote">{{ $data->misi }}</textarea>
                                                 @error('misi')
                                                     <div class="invalid-feedback">
                                                         {{ $message }}
@@ -273,6 +273,17 @@
                 $('#input_pass').val(result)
                 // return result;
             }
+        </script>
+
+        <script type="text/javascript" src="{{ URL('admin_template/assets/plugins/summernote/summernote-bs4.min.js') }}">
+        </script>
+        <script>
+            $(document).ready(function() {
+                $('.summernote').summernote({
+                    tabsize: 3,
+                    height: 550
+                });
+            });
         </script>
     @endpush
 @endsection

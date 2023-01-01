@@ -5,6 +5,7 @@ use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KategoriArtikelController;
 use App\Http\Controllers\KontakController;
+use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\LayananController;
 use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\PortofolioController;
@@ -34,9 +35,10 @@ Route::get('/login', function () {
     return view('auth/login', compact('_portal_data'));
 })->name('login');
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get(
+    '/',
+    [LandingPageController::class, 'Home']
+);
 
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

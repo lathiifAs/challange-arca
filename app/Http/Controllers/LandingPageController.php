@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Layanan;
+use App\Models\Partner;
+use App\Models\Teknologi;
 use App\Models\Tentang;
 use Illuminate\Http\Request;
 
-class HomeController extends BaseController
+class LandingPageController extends Controller
 {
    /**
      * Create a new controller instance.
@@ -33,21 +36,10 @@ class HomeController extends BaseController
     public function Home()
     {
         $_portal_data = Tentang::all()->first();
-        return view('welcome', compact('_portal_data'));
+        $_layanan = Layanan::get();
+        $_teknologi = Teknologi::get();
+        $_partner = Partner::get();
+        return view('welcome', compact('_portal_data', '_layanan', '_teknologi', '_partner'));
     }
 
-    public function adminHome()
-    {
-        return view('adminHome');
-    }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function operatorHome()
-    {
-        return view('operatorHome');
-    }
 }
