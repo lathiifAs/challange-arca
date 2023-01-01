@@ -11,6 +11,7 @@ class Pesan extends Model
 
     protected $fillable = [
         'name',
+        'subject',
         'email',
         'phone',
         'message'

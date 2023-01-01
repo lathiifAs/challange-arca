@@ -442,7 +442,8 @@
 
                     <div class="col-lg-6 mt-5 mt-lg-0">
 
-                        <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+                        <form action="{{ 'sendpesan' }}" method="post" role="form" class="php-email-form">
+                            @csrf
                             <div class="row gy-2 gx-md-3">
                                 <div class="col-md-6 form-group">
                                     <input type="text" name="name" class="form-control" id="name"

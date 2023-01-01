@@ -38,7 +38,12 @@ Route::get('/login', function () {
 Route::get(
     '/',
     [LandingPageController::class, 'Home']
-);
+)->name('/');
+
+Route::post(
+    '/sendpesan',
+    [LandingPageController::class, 'StorePesan']
+)->name('sendpesan');
 
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
