@@ -10,6 +10,7 @@ class Portofolio extends Model
     use HasFactory;
 
     protected $fillable = [
+        'layanan_id',
         'name',
         'tanggal',
         'img_thumb_path',

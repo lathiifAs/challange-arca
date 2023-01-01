@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AkunController;
+use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KategoriArtikelController;
 use App\Http\Controllers\KontakController;
@@ -93,6 +94,16 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::get('/master/kategori-artikel/add', [KategoriArtikelController::class, 'add'])->name('master.kategori-artikel.add');
     Route::post('/master/kategori-artikel/add', [KategoriArtikelController::class, 'store'])->name('master.kategori-artikel.add');
     Route::get('/master/kategori-artikel/delete/{id}', [KategoriArtikelController::class, 'delete'])->name('master.kategori-artikel.delete');
+
+
+    // artikel
+    Route::get('/master/artikel', [ArtikelController::class, 'index'])->name('master.artikel');
+    Route::get('/master/artikel/add', [ArtikelController::class, 'add'])->name('master.artikel.add');
+    Route::post('/master/artikel/add', [ArtikelController::class, 'store'])->name('master.artikel.add');
+    Route::get('/master/artikel/edit/{id}', [ArtikelController::class, 'edit'])->name('master.artikel.edit');
+    Route::post('/master/artikel/update', [ArtikelController::class, 'update'])->name('master.artikel.update');
+    Route::get('/master/artikel/delete/{id}', [ArtikelController::class, 'delete'])->name('master.artikel.delete');
+
 
     // Portofolio
     Route::get('/master/portofolio', [PortofolioController::class, 'index'])->name('master.portofolio');

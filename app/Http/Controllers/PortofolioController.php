@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Layanan;
 use App\Models\Portofolio;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -24,12 +25,12 @@ class PortofolioController extends BaseController
     {
         $keyword = $request->keyword;
         $main_title = "Portofolio";
-        $data = Portofolio::where(function ($query) use ($keyword) {
-            $query->orWhere('name', 'LIKE', '%' . $keyword . '%');
+        $data = Portofolio::leftjoin('layanans', 'layanans.id', '=', 'portofolios.layanan_id')->select('portofolios.*', 'layanans.name as layanan_name')->where(function ($query) use ($keyword) {
+            $query->orWhere('portofolios.name', 'LIKE', '%' . $keyword . '%');
         })
             ->orderBy('created_at', 'desc')
             ->paginate(10);
-        $data->withPath('akun');
+        $data->withPath('portofolio');
         $data->appends($request->all());
 
         return view('admin.master.portofolio.index', compact('main_title', 'data', 'keyword'));
@@ -38,7 +39,8 @@ class PortofolioController extends BaseController
     public function add(Request $request)
     {
         $main_title = "Portofolio";
-        return view('admin.master.portofolio.add', compact('main_title'));
+        $data = Layanan::get();
+        return view('admin.master.portofolio.add', compact('main_title', 'data'));
     }
 
     public function store(Request $request)
@@ -98,6 +100,7 @@ class PortofolioController extends BaseController
             }
 
             $send  = Portofolio::create([
+                'layanan_id'            => $request['layanan_id'],
                 'name'                  => $request['name'],
                 'desc'                  => $request['desc'],
                 'tanggal'               => $request['tanggal'],
@@ -137,8 +140,9 @@ class PortofolioController extends BaseController
     public function edit($id)
     {
         $main_title = "Portofolio";
+        $layanan = Layanan::get();
         $data = Portofolio::where('id', $id)->first();
-        return view('admin.master.portofolio.edit', compact('main_title', 'data'));
+        return view('admin.master.portofolio.edit', compact('main_title', 'layanan','data'));
     }
 
     public function update(Request $request)
@@ -182,6 +186,7 @@ class PortofolioController extends BaseController
 
         //
         $params = [
+            'layanan_id'            => $request['layanan_id'],
             'name'                  => $request['name'],
             'desc'                  => $request['desc'],
             'tanggal'               => $request['tanggal'],

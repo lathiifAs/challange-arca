@@ -43,7 +43,7 @@
                             @include('template.notifikasi')
                             <div class="card-block">
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-3">
                                         <label>Tanggal</label>
                                         <input type="date" class="form-control @error('tanggal') is-invalid @enderror"
                                             name="tanggal" value="{{ old('tanggal') }}" required placeholder="tanggal">
@@ -53,10 +53,27 @@
                                             </div>
                                         @enderror
                                     </div>
+                                    <div class="col-md-3">
+                                        <label>Layanan</label>
+                                        <select class="form-control" required name="layanan_id">
+                                            @forelse($data as $key=> $layanan)
+                                                <option value="{{ $layanan->id }}">{{ $layanan->name }}</option>
+                                            @empty
+                                            <option value="">Data Kosong !</option>
+                                            @endforelse
+                                        </select>
+                                        @error('tanggal')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
                                     <div class="col-md-6">
                                         <label>Gambar Cover <i>(*JPG, PNG, BMP, JIFF)</i></label>
-                                        <input type="file" class="form-control @error('img_thumb_name') is-invalid @enderror"
-                                            name="img_thumb_name" value="{{ old('img_thumb_name') }}" required placeholder="img_thumb_name">
+                                        <input type="file"
+                                            class="form-control @error('img_thumb_name') is-invalid @enderror"
+                                            name="img_thumb_name" value="{{ old('img_thumb_name') }}" required
+                                            placeholder="img_thumb_name">
                                         @error('img_thumb_name')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -99,7 +116,7 @@
                                                 <input type="file"
                                                     class="form-control @error('img_porto_2_name') is-invalid @enderror"
                                                     name="img_porto_2_name" value="{{ old('img_porto_2_name') }}"
-                                                    id="input_pass"  placeholder="img_porto_2_name">
+                                                    id="input_pass" placeholder="img_porto_2_name">
                                                 @error('img_porto_2_name')
                                                     <div class="invalid-feedback">
                                                         {{ $message }}
@@ -123,13 +140,15 @@
                                         <label>Gambar 3 <i>(*JPG, PNG, BMP, JIFF)</i></label>
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <input type="file" class="form-control @error('img_porto_3_name') is-invalid @enderror"
-                                                name="img_porto_3_name" value="{{ old('img_porto_3_name') }}" id="input_pass"   placeholder="img_porto_3_name">
-                                            @error('img_porto_3_name')
-                                                <div class="invalid-feedback">
-                                                    {{ $message }}
-                                                </div>
-                                            @enderror
+                                                <input type="file"
+                                                    class="form-control @error('img_porto_3_name') is-invalid @enderror"
+                                                    name="img_porto_3_name" value="{{ old('img_porto_3_name') }}"
+                                                    id="input_pass" placeholder="img_porto_3_name">
+                                                @error('img_porto_3_name')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
@@ -137,13 +156,15 @@
                                         <label>Gambar 4 <i>(*JPG, PNG, BMP, JIFF)</i></label>
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <input type="file" class="form-control @error('img_porto_4_name') is-invalid @enderror"
-                                                name="img_porto_4_name" value="{{ old('img_porto_4_name') }}" id="input_pass"   placeholder="img_porto_4_name">
-                                            @error('img_porto_4_name')
-                                                <div class="invalid-feedback">
-                                                    {{ $message }}
-                                                </div>
-                                            @enderror
+                                                <input type="file"
+                                                    class="form-control @error('img_porto_4_name') is-invalid @enderror"
+                                                    name="img_porto_4_name" value="{{ old('img_porto_4_name') }}"
+                                                    id="input_pass" placeholder="img_porto_4_name">
+                                                @error('img_porto_4_name')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
@@ -164,6 +185,5 @@
     </div>
 
     @push('custom-scripts')
-
     @endpush
 @endsection

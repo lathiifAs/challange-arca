@@ -64,6 +64,7 @@
                                     <tr>
                                         <th class="text-center" width="5%">No.</th>
                                         <th class="text-center" width="15%">Gambar</th>
+                                        <th class="text-center" width="10%">Layanan</th>
                                         <th class="text-center" width="20%">Judul</th>
                                         <th class="text-center" width="35%">Dekripsi</th>
                                         <th class="text-center" width="15%">Tanggal</th>
@@ -75,8 +76,9 @@
                                         <tr>
                                             <th class="text-center">{{ $key + 1 }}</th>
                                             <td class="text-center">
-                                                <img src="{{ URL($porto->img_thumb_path.$porto->img_thumb_name)}}" alt="logo.png" width="80px">
+                                                <img src="{{ URL($porto->img_thumb_path.$porto->img_thumb_name)}}" alt="logo.png" width="100px">
                                             </td>
+                                            <td  class="text-center">{{ $porto->layanan_name }}</td>
                                             <td>{{ $porto->name }}</td>
                                             <td>{{ $porto->desc }}</td>
                                             <td class="text-center">{{ date('d F Y', strtotime($porto->tanggal)); }}</td>

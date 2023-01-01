@@ -81,7 +81,7 @@
                 </a>
             </li>
             <li class="{{ Request::segment(2) == 'artikel' ? 'active' : '' }}">
-                <a href="color.html" class="waves-effect waves-dark">
+                <a href="{{ route('master.artikel') }}" class="waves-effect waves-dark">
                     <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                     <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Artikel</span>
                     <span class="pcoded-mcaret"></span>

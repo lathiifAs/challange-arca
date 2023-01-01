@@ -32,6 +32,7 @@
     <!-- Style.css -->
     <link rel="stylesheet" type="text/css" href="{{ URL('admin_template/assets/css/style.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ URL('admin_template/assets/css/jquery.mCustomScrollbar.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ URL('admin_template/assets/plugins/summernote/summernote-bs4.css')}}">
 </head>
 
 <body>

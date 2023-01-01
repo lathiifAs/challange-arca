@@ -44,10 +44,26 @@
                             @include('template.notifikasi')
                             <div class="card-block">
                                 <div class="row">
-                                    <div class="col-md-6">
+
+                                    <div class="col-md-3">
                                         <label>Tanggal</label>
                                         <input type="date" class="form-control @error('tanggal') is-invalid @enderror"
                                             name="tanggal" value="{{ $data->tanggal }}" required placeholder="tanggal">
+                                        @error('tanggal')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label>Layanan</label>
+                                        <select class="form-control" required name="layanan_id">
+                                            @forelse($layanan as $key=> $ly)
+                                                <option value="{{ $ly->id }}" @if($data->layanan_id == $ly->id)  selected @endif>{{ $ly->name }}</option>
+                                            @empty
+                                                Data Kosong !
+                                            @endforelse
+                                        </select>
                                         @error('tanggal')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
