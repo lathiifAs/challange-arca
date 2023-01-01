@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kontak;
 use App\Models\Layanan;
 use App\Models\Partner;
 use App\Models\Portofolio;
@@ -41,7 +42,8 @@ class LandingPageController extends Controller
         $_teknologi = Teknologi::get();
         $_partner = Partner::get();
         $_portofolio = Portofolio::get();
-        return view('welcome', compact('_portal_data', '_layanan', '_teknologi', '_partner', '_portofolio'));
+        $_kontak = Kontak::first();
+        return view('welcome', compact('_kontak','_portal_data', '_layanan', '_teknologi', '_partner', '_portofolio'));
     }
 
 }
