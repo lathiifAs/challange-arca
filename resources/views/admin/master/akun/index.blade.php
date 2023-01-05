@@ -63,7 +63,6 @@
                                 <thead>
                                     <tr>
                                         <th class="text-center" width="5%">No.</th>
-                                        <th class="text-center" width="20%">Role</th>
                                         <th class="text-center" width="30%">Nama</th>
                                         <th class="text-center" width="25%">Email</th>
                                         <th width="20%"></th>
@@ -73,7 +72,6 @@
                                     @forelse($data as $key=> $akun)
                                         <tr>
                                             <th class="text-center">{{ $key + 1 }}</th>
-                                            <td class="text-center">{{ strtoupper(trans($akun->type)) }}</td>
                                             <td>{{ $akun->name }}</td>
                                             <td class="text-center">{{ $akun->email }}</td>
                                             <td class="text-center">

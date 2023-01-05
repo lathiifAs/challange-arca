@@ -6,7 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
-class AkunController extends Controller
+class UserController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -21,8 +21,9 @@ class AkunController extends Controller
     public function index(Request $request)
     {
         $keyword = $request->keyword;
-        $main_title = "Master Data Admin";
-        $data = User::where('type', '!=', 0)->where(function ($query) use ($keyword) {
+        $main_title = "Master Data User Regular";
+        $data = User::where('type', '!=', 1)
+            ->where(function ($query) use ($keyword) {
                 $query->orWhere('name', 'LIKE', '%' . $keyword . '%');
             })
             ->orderBy('created_at', 'desc')
@@ -30,13 +31,13 @@ class AkunController extends Controller
         $data->withPath('akun');
         $data->appends($request->all());
 
-        return view('admin.master.akun.index', compact('main_title', 'data', 'keyword'));
+        return view('admin.master.user.index', compact('main_title', 'data', 'keyword'));
     }
 
     public function add(Request $request)
     {
-        $main_title = "Master Data Admin";
-        return view('admin.master.akun.add', compact('main_title'));
+        $main_title = "Master Data User Regular";
+        return view('admin.master.user.add', compact('main_title'));
     }
 
     public function store(Request $request)
@@ -60,11 +61,10 @@ class AkunController extends Controller
             'name' => $request['name'],
             'email' => $request['email'],
             'password' => Hash::make($request['password']),
-            'type' => 1
         ]);
         if ($send) {
             return redirect()
-                ->route('master.akun.add')
+                ->route('master.user.add')
                 ->with([
                     'success' => 'Data berhasil ditambahkan.'
                 ]);
@@ -80,9 +80,9 @@ class AkunController extends Controller
 
     public function edit($id)
     {
-        $main_title = "Master Data Admin";
+        $main_title = "Master Data User Regular";
         $akun = User::where('id', $id)->first();
-        return view('admin.master.akun.edit', compact('main_title', 'akun'));
+        return view('admin.master.user.edit', compact('main_title', 'akun'));
     }
 
     public function update(Request $request){
@@ -118,7 +118,7 @@ class AkunController extends Controller
 
         if ($akun) {
             return redirect()
-                ->route('master.akun.edit', compact('id'))
+                ->route('master.user.edit', compact('id'))
                 ->with([
                     'success' => 'Data berhasil diupdate'
                 ]);

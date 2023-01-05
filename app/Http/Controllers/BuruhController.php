@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Buruh;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
-class AkunController extends Controller
+class BuruhController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -21,22 +22,22 @@ class AkunController extends Controller
     public function index(Request $request)
     {
         $keyword = $request->keyword;
-        $main_title = "Master Data Admin";
-        $data = User::where('type', '!=', 0)->where(function ($query) use ($keyword) {
-                $query->orWhere('name', 'LIKE', '%' . $keyword . '%');
+        $main_title = "Master Data Buruh";
+        $buruh = Buruh::where(function ($query) use ($keyword) {
+                $query->orWhere('nama', 'LIKE', '%' . $keyword . '%');
             })
             ->orderBy('created_at', 'desc')
             ->simplePaginate(5);
-        $data->withPath('akun');
-        $data->appends($request->all());
+        $buruh->withPath('buruh');
+        $buruh->appends($request->all());
 
-        return view('admin.master.akun.index', compact('main_title', 'data', 'keyword'));
+        return view('admin.master.buruh.index', compact('main_title', 'buruh', 'keyword'));
     }
 
     public function add(Request $request)
     {
-        $main_title = "Master Data Admin";
-        return view('admin.master.akun.add', compact('main_title'));
+        $main_title = "Master Data Buruh";
+        return view('admin.master.buruh.add', compact('main_title'));
     }
 
     public function store(Request $request)
@@ -44,27 +45,23 @@ class AkunController extends Controller
         $kosong = 'tidak boleh kosong';
         $validatedData = $request->validate(
             [
-                'name' => 'required',
-                'email' => 'required',
-                'password' => 'required',
+                'nama' => 'required',
+                'alamat' => 'required'
             ],
 
             [
-                'name.required' => 'Nama ' . $kosong,
-                'email.required' => 'Email ' . $kosong,
-                'password.required' => 'Password ' . $kosong,
+                'nama.required' => 'Nama ' . $kosong,
+                'alamat.required' => 'alamat ' . $kosong,
             ]
         );
 
-        $send = User::create([
-            'name' => $request['name'],
-            'email' => $request['email'],
-            'password' => Hash::make($request['password']),
-            'type' => 1
+        $send = Buruh::create([
+            'nama' => $request['nama'],
+            'alamat' => $request['alamat'],
         ]);
         if ($send) {
             return redirect()
-                ->route('master.akun.add')
+                ->route('master.buruh.add')
                 ->with([
                     'success' => 'Data berhasil ditambahkan.'
                 ]);
@@ -80,9 +77,9 @@ class AkunController extends Controller
 
     public function edit($id)
     {
-        $main_title = "Master Data Admin";
-        $akun = User::where('id', $id)->first();
-        return view('admin.master.akun.edit', compact('main_title', 'akun'));
+        $main_title = "Master Data Buruh";
+        $buruh = Buruh::where('id', $id)->first();
+        return view('admin.master.buruh.edit', compact('main_title', 'buruh'));
     }
 
     public function update(Request $request){
@@ -90,35 +87,32 @@ class AkunController extends Controller
         $validatedData = $request->validate(
             [
                 'id' => 'required',
-                'name' => 'required',
-                'email' => 'required',
+                'nama' => 'required',
             ],
 
             [
                 'id.required' => 'ID ' . $kosong,
-                'name.required' => 'Nama ' . $kosong,
-                'email.required' => 'Email ' . $kosong,
+                'nama.required' => 'Nama ' . $kosong,
             ]
         );
 
         $id = $request->id;
         if (!empty($request->password)) {
-            $akun = User::where('id', $request->id)->update([
-                'name' => $request['name'],
-                'email' => $request['email'],
-                'password' => Hash::make($request['password']),
+            $akun = Buruh::where('id', $request->id)->update([
+                'nama' => $request['nama'],
+                'alamat' => $request['alamat'],
 
             ]);
         }else{
-            $akun = User::where('id', $request->id)->update([
-                'name' => $request['name'],
-                'email' => $request['email'],
+            $akun = Buruh::where('id', $request->id)->update([
+                'nama' => $request['nama'],
+                'alamat' => $request['alamat'],
             ]);
         }
 
         if ($akun) {
             return redirect()
-                ->route('master.akun.edit', compact('id'))
+                ->route('master.buruh.edit', compact('id'))
                 ->with([
                     'success' => 'Data berhasil diupdate'
                 ]);
@@ -135,7 +129,7 @@ class AkunController extends Controller
     public function delete(Request $request)
     {
 
-        $hapus = User::findOrFail($request->id);
+        $hapus = Buruh::findOrFail($request->id);
         $hapus->delete();
         $hapus->where('id', $request->id);
         if ($hapus) {

@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>{{ $_portal_data->name ?? 'Nama Website'}} </title>
+    <title> </title>
     <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 10]>
@@ -19,10 +19,7 @@
       <!-- Favicon icon -->
 
       {{-- <link rel="icon" href="{{ URL('admin_template/assets/images/favicon.ico')}}" type="image/x-icon"> --}}
-      @if ($_portal_data->favicon_name)
-        <link rel="icon" href="{{ URL($_portal_data->favicon_path.$_portal_data->favicon_name)}}" type="image/x-icon">
-      @endif
-      {{-- <link rel="icon" href="{{ URL($_portal_data->favicon_path.$_portal_data->favicon_name)}}" type="image/x-icon"> --}}
+        <link rel="icon" href="" type="image/x-icon">
       <!-- Google font-->
       <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
       <!-- Required Fremwork -->
@@ -101,12 +98,9 @@
             <div class="row">
                 <div class="col-sm-12">
                     <!-- Authentication card start -->
-
                         <form class="md-float-material form-material" method="POST" action="{{ route('login') }}">
                             @csrf
                             <div class="text-center">
-                                {{-- {{ $_portal_data->name ?? "Nama Website"}} --}}
-                                <img src="{{ URL($_portal_data->logo_path.$_portal_data->logo_name)}}" alt="logo.png" width="200px">
                             </div>
                             <div class="auth-box card">
                                 <div class="card-block">
@@ -151,11 +145,7 @@
                                     <div class="row m-t-25 text-left">
                                         <div class="col-12">
                                             <div class="checkbox-fade fade-in-primary d-">
-                                                <label>
-                                                    <input type="checkbox" value="">
-                                                    <span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span>
-                                                    <span class="text-inverse">Remember me</span>
-                                                </label>
+
                                             </div>
                                             <div class="forgot-phone text-right f-right">
                                                 <a href="#" class="text-right f-w-600"> Forgot Password?</a>

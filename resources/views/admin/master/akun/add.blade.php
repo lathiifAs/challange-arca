@@ -42,36 +42,9 @@
                         @include('template.notifikasi')
                             <div class="card-block">
                                 <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Role</label>
-                                        <select class="form-control" required
-                                                    name="type">
-                                                        <option value="1">Admin</option>
-                                                        <option value="0">Operator</option>
-                                        </select>
-                                        @error('nama')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label>Email</label>
-                                        <input type="email"
-                                            class="form-control @error('email') is-invalid @enderror"
-                                            name="email" value="{{ old('email') }}" required
-                                            placeholder="Email">
-                                        @error('email')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
-                                    </div>
-                                </div>
 
-                                <div class="row mt-3">
                                     <div class="col-md-6">
-                                        <label>Nama</label>
+                                        <label>Nama</label><sup class="text-danger">*</sup>
                                         <input type="text" class="form-control @error('name') is-invalid @enderror" required
                                             name="name" value="{{ old('name') }}" placeholder="Nama">
                                         <input type="hidden" class="form-control" name="role" value="siswa">
@@ -82,7 +55,7 @@
                                         @enderror
                                     </div>
                                     <div class="col-lg-6">
-                                        <label>Password</label>
+                                        <label>Password</label><sup class="text-danger">*</sup>
                                         <div class="row">
                                             <div class="col-md-10">
                                                 <input type="text" class="form-control @error('password') is-invalid @enderror"
@@ -99,6 +72,23 @@
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+
+                                <div class="row mt-3">
+                                    <div class="col-md-6">
+                                        <label>Email</label><sup class="text-danger">*</sup>
+                                        <input type="email"
+                                            class="form-control @error('email') is-invalid @enderror"
+                                            name="email" value="{{ old('email') }}" required
+                                            placeholder="Email">
+                                        @error('email')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+
+
                                 </div>
                             </div>
                             <div class="col-md-12 text-right mt-3">

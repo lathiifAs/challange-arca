@@ -14,7 +14,7 @@
                         <li class="breadcrumb-item">
                             <a href="index.html"> <i class="ti-layout-grid2-alt"></i> </a>
                         </li>
-                        <li class="breadcrumb-item"><a href="{{ route('master.akun') }}">Master</a>
+                        <li class="breadcrumb-item"><a href="{{ route('master.buruh') }}">Master</a>
                         </li>
                         <li class="breadcrumb-item"><a href="#!">{{ $main_title }}</a>
                         </li>
@@ -26,15 +26,15 @@
     <!-- Page-header end -->
     <div class="pcoded-inner-content">
         <div class="main-body">
-            <form action="{{ route('master.akun.update') }}" method="POST" action="" enctype="multipart/form-data">
-                <input type="hidden" value="{{ $akun->id }}" name="id" id="">
+            <form action="{{ route('master.buruh.update') }}" method="POST" action="" enctype="multipart/form-data">
+                <input type="hidden" value="{{ $buruh->id }}" name="id" id="">
                 @csrf
             <div class="page-wrapper">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Akun</h4>
+                        <h4>{{ $main_title }}</h4>
                         <div class="card-header-right">
-                            <a href="{{ route('master.akun') }}"
+                            <a href="{{ route('master.buruh') }}"
                             class="btn btn-outline-secondary text-center border-0 btn-sm"><span><i class="fa fa-arrow-left"></i> Kembali</span></a>
                         </div>
                         <div class="col-md-12 mt-4">
@@ -45,46 +45,22 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <label>Nama</label><sup class="text-danger">*</sup>
-                                        <input type="text" class="form-control @error('name') is-invalid @enderror" required
-                                            name="name" value="{{ $akun->name }}" placeholder="Nama">
-                                        <input type="hidden" class="form-control" name="role" value="siswa">
-                                        @error('name')
+                                        <input type="text" class="form-control @error('nama') is-invalid @enderror" required
+                                            name="nama" value="{{ $buruh->nama }}" placeholder="Nama">
+                                        <input type="hidden" class="form-control" nama="role" value="siswa">
+                                        @error('nama')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
                                             </div>
                                         @enderror
                                     </div>
-                                    <div class="col-lg-6">
-                                        <div class="row col-md-12">
-                                            <label>Password &nbsp;</label> <sup style="color: orangered" class="mt-2">*<span class=""><i style="color: orangered">(Tidak perlu di isi jika tidak ingin dirubah)</i></sup>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-10">
-                                                <input type="text" class="form-control @error('password') is-invalid @enderror"
-                                                name="password"  id="input_pass"   placeholder="Password">
-                                            @error('password')
-                                                <div class="invalid-feedback">
-                                                    {{ $message }}
-                                                </div>
-                                            @enderror
-                                            </div>
-                                            <div class="col-md-2">
-                                                    <a href="#" onclick="generate()"
-                                                        class="btn btn-grd-primary text-center"><span>Generate</span></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row mt-3">
                                     <div class="col-md-6">
-                                        <label>Email</label>
-                                        <sup class="text-danger">*</sup>
-                                        <input type="email"
-                                            class="form-control @error('email') is-invalid @enderror"
-                                            name="email" value="{{ $akun->email }}" required
-                                            placeholder="Email">
-                                        @error('email')
+                                        <label>Alamat</label><sup class="text-danger">*</sup>
+                                        <input type="text"
+                                            class="form-control @error('alamat') is-invalid @enderror"
+                                            name="alamat" value="{{ $buruh->alamat }}" required
+                                            placeholder="alamat">
+                                        @error('alamat')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
                                             </div>

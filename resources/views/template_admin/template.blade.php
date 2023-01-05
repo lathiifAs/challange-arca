@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Admin Portal |  {{ $_portal_data->name ?? '' }}</title>
+    <title>Admin Portal</title>
     <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 10]>
@@ -17,9 +17,7 @@
     <meta name="keywords" content="flat ui, admin Admin , Responsive, Landing, Bootstrap, App, Template, Mobile, iOS, Android, apple, creative app">
     <meta name="author" content="codedthemes" />
     <!-- Favicon icon -->
-    @if ($_portal_data->favicon_name)
-        <link rel="icon" href="{{ URL($_portal_data->favicon_path.$_portal_data->favicon_name)}}" type="image/x-icon">
-    @endif
+        <link rel="icon" href="" type="image/x-icon">
     <!-- Google font-->     <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
     <!-- Required Fremwork -->
     <link rel="stylesheet" type="text/css" href="{{ URL('admin_template/assets/css/bootstrap/css/bootstrap.min.css')}}">

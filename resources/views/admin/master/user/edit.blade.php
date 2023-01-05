@@ -14,7 +14,7 @@
                         <li class="breadcrumb-item">
                             <a href="index.html"> <i class="ti-layout-grid2-alt"></i> </a>
                         </li>
-                        <li class="breadcrumb-item"><a href="{{ route('master.akun') }}">Master</a>
+                        <li class="breadcrumb-item"><a href="{{ route('master.user') }}">Master</a>
                         </li>
                         <li class="breadcrumb-item"><a href="#!">{{ $main_title }}</a>
                         </li>
@@ -26,7 +26,7 @@
     <!-- Page-header end -->
     <div class="pcoded-inner-content">
         <div class="main-body">
-            <form action="{{ route('master.akun.update') }}" method="POST" action="" enctype="multipart/form-data">
+            <form action="{{ route('master.user.update') }}" method="POST" action="" enctype="multipart/form-data">
                 <input type="hidden" value="{{ $akun->id }}" name="id" id="">
                 @csrf
             <div class="page-wrapper">
@@ -34,7 +34,7 @@
                     <div class="card-header">
                         <h4>Akun</h4>
                         <div class="card-header-right">
-                            <a href="{{ route('master.akun') }}"
+                            <a href="{{ route('master.user') }}"
                             class="btn btn-outline-secondary text-center border-0 btn-sm"><span><i class="fa fa-arrow-left"></i> Kembali</span></a>
                         </div>
                         <div class="col-md-12 mt-4">

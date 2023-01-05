@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AkunController;
 use App\Http\Controllers\ArtikelController;
+use App\Http\Controllers\BuruhController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KategoriArtikelController;
 use App\Http\Controllers\KontakController;
@@ -11,8 +12,10 @@ use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\PortofolioController;
 use App\Http\Controllers\TeknologiController;
 use App\Http\Controllers\TentangController;
+use App\Http\Controllers\UserController;
 use App\Models\Tentang;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,21 +33,18 @@ use Illuminate\Support\Facades\Route;
 // Auth::routes();
 Auth::routes(['verify' => true]);
 
-Route::get('/login', function () {
-    $_portal_data = Tentang::all()->first();
-    return view('auth/login', compact('_portal_data'));
-})->name('login');
+// Route::get('/login', function () {
+//     return view('auth/login', compact('_portal_data'));
+// })->name('login');
 
-Route::get(
-    '/',
-    [LandingPageController::class, 'Home']
-)->name('/');
+// Route::get(
+//     '/',
+//     [LandingPageController::class, 'Home']
+// )->name('/');
 
-Route::post(
-    '/sendpesan',
-    [LandingPageController::class, 'StorePesan']
-)->name('sendpesan');
-
+Route::get('/', function () {
+    return Redirect::to('login');
+});
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -65,6 +65,12 @@ All Admin Routes List
 --------------------------------------------*/
 Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::get('/admin/home', [HomeController::class, 'adminHome'])->name('admin.home');
+    Route::get('/admin/home/add', [HomeController::class, 'add'])->name('admin.home.add');
+    Route::get('/admin/home/detail/{id}', [HomeController::class, 'detail'])->name('admin.home.detail');
+    Route::post('/admin/home/add', [HomeController::class, 'store'])->name('admin.home.add');
+    Route::get('/admin/home/edit/{id}', [HomeController::class, 'edit'])->name('admin.home.edit');
+    Route::post('/admin/home/update', [HomeController::class, 'update'])->name('admin.home.update');
+    Route::get('/admin/home/delete/{id}', [HomeController::class, 'delete'])->name('admin.home.delete');
 
     // Akun
     Route::get('/master/akun', [AkunController::class, 'index'])->name('master.akun');
@@ -74,56 +80,21 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::post('/master/akun/update', [AkunController::class, 'update'])->name('master.akun.update');
     Route::get('/master/akun/delete/{id}', [AkunController::class, 'delete'])->name('master.akun.delete');
 
-    // teknologi
-    Route::get('/master/teknologi', [TeknologiController::class, 'index'])->name('master.teknologi');
-    Route::get('/master/teknologi/add', [TeknologiController::class, 'add'])->name('master.teknologi.add');
-    Route::post('/master/teknologi/add', [TeknologiController::class, 'store'])->name('master.teknologi.add');
-    Route::get('/master/teknologi/delete/{id}', [TeknologiController::class, 'delete'])->name('master.teknologi.delete');
+    // Regular User
+    Route::get('/master/user', [UserController::class, 'index'])->name('master.user');
+    Route::get('/master/user/add', [UserController::class, 'add'])->name('master.user.add');
+    Route::post('/master/user/add', [UserController::class, 'store'])->name('master.user.add');
+    Route::get('/master/user/edit/{id}', [UserController::class, 'edit'])->name('master.user.edit');
+    Route::post('/master/user/update', [UserController::class, 'update'])->name('master.user.update');
+    Route::get('/master/user/delete/{id}', [UserController::class, 'delete'])->name('master.user.delete');
 
-    // Tentang
-    Route::get('/admin/tentang', [TentangController::class, 'index'])->name('admin.tentang');
-    Route::post('/admin/tentang/store', [TentangController::class, 'store'])->name('admin.tentang.store');
-
-    // layanan
-    Route::get('/master/layanan', [LayananController::class, 'index'])->name('master.layanan');
-    Route::get('/master/layanan/add', [LayananController::class, 'add'])->name('master.layanan.add');
-    Route::post('/master/layanan/add', [LayananController::class, 'store'])->name('master.layanan.add');
-    Route::get('/master/layanan/delete/{id}', [LayananController::class, 'delete'])->name('master.layanan.delete');
-
-    // partner
-    Route::get('/master/partner', [PartnerController::class, 'index'])->name('master.partner');
-    Route::get('/master/partner/add', [PartnerController::class, 'add'])->name('master.partner.add');
-    Route::post('/master/partner/add', [PartnerController::class, 'store'])->name('master.partner.add');
-    Route::get('/master/partner/delete/{id}', [PartnerController::class, 'delete'])->name('master.partner.delete');
-
-    // kategori artikel
-    Route::get('/master/kategori-artikel', [KategoriArtikelController::class, 'index'])->name('master.kategori-artikel');
-    Route::get('/master/kategori-artikel/add', [KategoriArtikelController::class, 'add'])->name('master.kategori-artikel.add');
-    Route::post('/master/kategori-artikel/add', [KategoriArtikelController::class, 'store'])->name('master.kategori-artikel.add');
-    Route::get('/master/kategori-artikel/delete/{id}', [KategoriArtikelController::class, 'delete'])->name('master.kategori-artikel.delete');
-
-
-    // artikel
-    Route::get('/master/artikel', [ArtikelController::class, 'index'])->name('master.artikel');
-    Route::get('/master/artikel/add', [ArtikelController::class, 'add'])->name('master.artikel.add');
-    Route::post('/master/artikel/add', [ArtikelController::class, 'store'])->name('master.artikel.add');
-    Route::get('/master/artikel/edit/{id}', [ArtikelController::class, 'edit'])->name('master.artikel.edit');
-    Route::post('/master/artikel/update', [ArtikelController::class, 'update'])->name('master.artikel.update');
-    Route::get('/master/artikel/delete/{id}', [ArtikelController::class, 'delete'])->name('master.artikel.delete');
-
-
-    // Portofolio
-    Route::get('/master/portofolio', [PortofolioController::class, 'index'])->name('master.portofolio');
-    Route::get('/master/portofolio/add', [PortofolioController::class, 'add'])->name('master.portofolio.add');
-    Route::post('/master/portofolio/add', [PortofolioController::class, 'store'])->name('master.portofolio.add');
-    Route::get('/master/portofolio/edit/{id}', [PortofolioController::class, 'edit'])->name('master.portofolio.edit');
-    Route::post('/master/portofolio/update', [PortofolioController::class, 'update'])->name('master.portofolio.update');
-    Route::get('/master/portofolio/delete/{id}', [PortofolioController::class, 'delete'])->name('master.portofolio.delete');
-
-
-    // Kontak
-    Route::get('/admin/kontak', [KontakController::class, 'index'])->name('admin.kontak');
-    Route::post('/admin/kontak/store', [KontakController::class, 'store'])->name('admin.kontak.store');
+    // Buruh
+    Route::get('/master/buruh', [BuruhController::class, 'index'])->name('master.buruh');
+    Route::get('/master/buruh/add', [BuruhController::class, 'add'])->name('master.buruh.add');
+    Route::post('/master/buruh/add', [BuruhController::class, 'store'])->name('master.buruh.add');
+    Route::get('/master/buruh/edit/{id}', [BuruhController::class, 'edit'])->name('master.buruh.edit');
+    Route::post('/master/buruh/update', [BuruhController::class, 'update'])->name('master.buruh.update');
+    Route::get('/master/buruh/delete/{id}', [BuruhController::class, 'delete'])->name('master.buruh.delete');
 });
 
 /*------------------------------------------
@@ -133,5 +104,19 @@ All Admin Routes List
 --------------------------------------------*/
 Route::middleware(['auth', 'user-access:operator'])->group(function () {
 
-    Route::get('/operator/home', [HomeController::class, 'operatorHome'])->name('operator.home');
+    // Buruh
+    Route::get('/admin/home', [HomeController::class, 'adminHome'])->name('admin.home');
+    Route::get('/admin/home/add', [HomeController::class, 'add'])->name('admin.home.add');
+    Route::post('/admin/home/add', [HomeController::class, 'store'])->name('admin.home.add');
+    Route::get('/admin/home/detail/{id}', [HomeController::class, 'detail'])->name('admin.home.detail');
+    Route::get('/admin/home/edit/{id}', [HomeController::class, 'edit'])->name('admin.home.edit');
+    Route::post('/admin/home/update', [HomeController::class, 'update'])->name('admin.home.update');
+
+     // Buruh
+     Route::get('/master/buruh', [BuruhController::class, 'index'])->name('master.buruh');
+     Route::get('/master/buruh/add', [BuruhController::class, 'add'])->name('master.buruh.add');
+     Route::post('/master/buruh/add', [BuruhController::class, 'store'])->name('master.buruh.add');
+     Route::get('/master/buruh/edit/{id}', [BuruhController::class, 'edit'])->name('master.buruh.edit');
+     Route::post('/master/buruh/update', [BuruhController::class, 'update'])->name('master.buruh.update');
+     Route::get('/master/buruh/delete/{id}', [BuruhController::class, 'delete'])->name('master.buruh.delete');
 });

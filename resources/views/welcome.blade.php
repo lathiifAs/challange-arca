@@ -54,7 +54,7 @@
 
                 <div class="section-title">
                     <h2>Tentang Kami</h2>
-                    <p style="color: black">{{ $_portal_data->desc }}</p>
+                    <p style="color: black"></p>
                 </div>
 
                 <div class="row content">
@@ -63,7 +63,6 @@
                            <b>Visi</b>
                         </p>
                         <p class="text-justify">
-                            {!! $_portal_data->visi !!}
                         </p>
                     </div>
                     <div class="col-lg-6 pt-4 pt-lg-0">
@@ -71,7 +70,6 @@
                             <b>Misi</b>
                         </p>
                         <p class="text-justify">
-                            {!! $_portal_data->misi !!}
                         </p>
                     </div>
                 </div>
@@ -401,7 +399,7 @@
                             <div class="address">
                                 <i class="bi bi-geo-alt"></i>
                                 <h4>Alamat:</h4>
-                                <p>{{ $_portal_data->address }}</p>
+                                <p></p>
                             </div>
 
                             <div class="phone">
