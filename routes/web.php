@@ -105,18 +105,18 @@ All Admin Routes List
 Route::middleware(['auth', 'user-access:operator'])->group(function () {
 
     // Buruh
-    Route::get('/admin/home', [HomeController::class, 'adminHome'])->name('admin.home');
-    Route::get('/admin/home/add', [HomeController::class, 'add'])->name('admin.home.add');
-    Route::post('/admin/home/add', [HomeController::class, 'store'])->name('admin.home.add');
-    Route::get('/admin/home/detail/{id}', [HomeController::class, 'detail'])->name('admin.home.detail');
-    Route::get('/admin/home/edit/{id}', [HomeController::class, 'edit'])->name('admin.home.edit');
-    Route::post('/admin/home/update', [HomeController::class, 'update'])->name('admin.home.update');
+    Route::get('/operator/home', [HomeController::class, 'adminHome'])->name('operator.home');
+    // Route::get('/admin/home/add', [HomeController::class, 'add'])->name('admin.home.add');
+    // Route::post('/admin/home/add', [HomeController::class, 'store'])->name('admin.home.add');
+    // Route::get('/admin/home/detail/{id}', [HomeController::class, 'detail'])->name('admin.home.detail');
+    // Route::get('/admin/home/edit/{id}', [HomeController::class, 'edit'])->name('admin.home.edit');
+    // Route::post('/admin/home/update', [HomeController::class, 'update'])->name('admin.home.update');
 
-     // Buruh
-     Route::get('/master/buruh', [BuruhController::class, 'index'])->name('master.buruh');
-     Route::get('/master/buruh/add', [BuruhController::class, 'add'])->name('master.buruh.add');
-     Route::post('/master/buruh/add', [BuruhController::class, 'store'])->name('master.buruh.add');
-     Route::get('/master/buruh/edit/{id}', [BuruhController::class, 'edit'])->name('master.buruh.edit');
-     Route::post('/master/buruh/update', [BuruhController::class, 'update'])->name('master.buruh.update');
-     Route::get('/master/buruh/delete/{id}', [BuruhController::class, 'delete'])->name('master.buruh.delete');
+    //  // Buruh
+    //  Route::get('/master/buruh', [BuruhController::class, 'index'])->name('master.buruh');
+    //  Route::get('/master/buruh/add', [BuruhController::class, 'add'])->name('master.buruh.add');
+    //  Route::post('/master/buruh/add', [BuruhController::class, 'store'])->name('master.buruh.add');
+    //  Route::get('/master/buruh/edit/{id}', [BuruhController::class, 'edit'])->name('master.buruh.edit');
+    //  Route::post('/master/buruh/update', [BuruhController::class, 'update'])->name('master.buruh.update');
+    //  Route::get('/master/buruh/delete/{id}', [BuruhController::class, 'delete'])->name('master.buruh.delete');
 });
